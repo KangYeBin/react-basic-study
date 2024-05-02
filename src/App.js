@@ -1,6 +1,5 @@
 import React from "react";
 import Expenses from "./components/Expenses";
-import Hello from "./Hello";
 
 function App() {
   //지출 항목 객체 배열
@@ -26,13 +25,6 @@ function App() {
   return (
     <>
       <Expenses items={expenses} />
-      <Hello>
-        <ul>
-          <li>사과</li>
-          <li>포도</li>
-          <li>복숭아</li>
-        </ul>
-      </Hello>
     </>
   );
 }
