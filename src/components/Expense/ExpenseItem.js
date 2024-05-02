@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ExpenseItem.css";
 import ExpenseDate from "./ExpenseDate";
-import Card from "./UI/Card";
+import Card from "../UI/Card";
 
 // const ExpenseItem = (props) => {
 //디스트럭처링을 통해 props가 아닌 {title}로 바로 가져올 수 있다
