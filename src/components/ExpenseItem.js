@@ -10,7 +10,7 @@ const ExpenseItem = ({ title, price, date }) => {
   const formattedPrice = new Intl.NumberFormat("ko-KR").format(price);
 
   return (
-    <Card className={"circle"}>
+    <Card className="circle">
       <div className="expense-item">
         <ExpenseDate date={date} />
         <div className="expense-item__description">
