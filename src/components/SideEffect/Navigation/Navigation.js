@@ -1,34 +1,31 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import classes from './Navigation.module.css';
 import AuthContext from '../../Store/auth-context';
 
-const Navigation = (props) => {
+const Navigation = () => {
+  // AuthContext에서 제공되는 전역 객체를 디스트럭처링으로 분해
+  const { isLoggedIn, onLogout } = useContext(AuthContext);
+
   return (
-    <AuthContext.Consumer>
-      {(context) => {
-        return (
-          <nav className={classes.nav}>
-            <ul>
-              {context.isLoggedIn && (
-                <li>
-                  <a href="/">Users</a>
-                </li>
-              )}
-              {context.isLoggedIn && (
-                <li>
-                  <a href="/">Admin</a>
-                </li>
-              )}
-              {context.isLoggedIn && (
-                <li>
-                  <button onClick={props.onLogout}>Logout</button>
-                </li>
-              )}
-            </ul>
-          </nav>
-        );
-      }}
-    </AuthContext.Consumer>
+    <nav className={classes.nav}>
+      <ul>
+        {isLoggedIn && (
+          <li>
+            <a href="/">Users</a>
+          </li>
+        )}
+        {isLoggedIn && (
+          <li>
+            <a href="/">Admin</a>
+          </li>
+        )}
+        {isLoggedIn && (
+          <li>
+            <button onClick={onLogout}>Logout</button>
+          </li>
+        )}
+      </ul>
+    </nav>
   );
 };
 
