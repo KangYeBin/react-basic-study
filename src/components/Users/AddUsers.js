@@ -3,7 +3,7 @@ import Button from '../UI/Button/Button';
 import styles from './AddUsers.module.css';
 import Card from '../UI/Card';
 import ErrorModal from '../UI/Modal/ErrorModal';
-import { name } from 'eslint-plugin-prettier';
+//import { name } from 'eslint-plugin-prettier';
 
 const AddUsers = () => {
   // 에러 상태 관리
@@ -50,16 +50,9 @@ const AddUsers = () => {
         />
       )}
       <Card className={styles.input}>
-        <form
-          className={styles.input}
-          onSubmit={userSubmitHandler}
-        >
+        <form className={styles.input} onSubmit={userSubmitHandler}>
           <label htmlFor="username">이름</label>
-          <input
-            id="username"
-            type="text"
-            ref={nameInput}
-          />
+          <input id="username" type="text" ref={nameInput} />
           <label htmlFor="age">나이</label>
           <input id="age" type="number" ref={ageInput} />
           <Button type="submit">가입하기</Button>

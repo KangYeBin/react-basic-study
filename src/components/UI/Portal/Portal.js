@@ -1,4 +1,4 @@
-import React from 'react';
+//import React from 'react';
 import ReactDOM from 'react-dom';
 
 const Portal = ({ children: renderComponent, destId }) => {
