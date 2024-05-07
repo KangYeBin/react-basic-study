@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import MainHeader from './components/SideEffect/MainHeader/MainHeader';
 import Login from './components/SideEffect/Login/Login';
 import Home from './components/SideEffect/Home/Home';
+import AuthContext from './components/Store/auth-context';
 
 const App = () => {
   // 로그인 상태를 관리하는 함수
@@ -41,16 +42,17 @@ const App = () => {
   };
 
   return (
-    <>
-      <MainHeader
-        isAuthenticated={isLoggedIn}
-        onLogout={logoutHandler}
-      />
+    <AuthContext.Provider
+      value={{
+        isLoggedIn: isLoggedIn,
+      }}
+    >
+      <MainHeader onLogout={logoutHandler} />
       <main>
         {isLoggedIn && <Home />}
         {!isLoggedIn && <Login onLogin={loignHandler} />}
       </main>
-    </>
+    </AuthContext.Provider>
   );
 };
 
