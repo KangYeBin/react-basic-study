@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from './MealItemForm.module.scss';
 import Input from './../../../UI/Input/Input';
+import './MealItemForm.module.scss';
 
 const MealItemForm = (props) => {
   return (

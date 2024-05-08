@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './AvailableMeals.module.scss';
 import MealItem from './MealItem/MealItem';
-import { name } from 'eslint-plugin-prettier';
 import Card from './../../UI/Card';
 
 const DUMMY_MEALS = [
