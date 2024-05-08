@@ -12,12 +12,34 @@ const defaultState = {
 const cartReducer = (state, action) => {
   // 상태 변화의 타입이 ADD라면
   if (action.type === 'ADD') {
+    //신규 아이템 받기
+    const newCartItem = action.item;
+
+    // 기존 장바구니에 등록된 메뉴인지 아닌지 확인
+    // findIndex : 콜백을 통해 배열을 순화하면서 지정한 조건에 맞는 요소의 인덱스 반환
+    const index = state.items.findIndex(
+      (item) => item.id === newCartItem.id,
+    );
+
+    // 기존 장바구니 아이템
+    const existingItem = [...state.items]; // 기존 배열 복사
+    const prevCartItem = existingItem[index]; // 위에서 찾은 인덱스로 요소를 하나만 지목
+
+    let updatedItem;
+    if (index === -1) {
+      // 신규 아이템
+      updatedItem = [...state.items, newCartItem];
+    } else {
+      // 이미 추가됐던 아이템
+      // prevCartItem.amount++; (x) -> 바깥 화면에서는 상품이 여러 개의 수량이 올라갈 수 있으므로
+      prevCartItem.amount += newCartItem.amount;
+      updatedItem = [...existingItem]; // 복사 배열을 갱신
+    }
+
     // 기존 상태가 갖고 있는 장바구니 항목에 새로운 항목 추가
-    const updatedItem = [...state.items, action.item];
-    console.log(updatedItem);
 
     const updatedPrice =
-      state.totalPrice + action.item.price * action.item.amount;
+      state.totalPrice + newCartItem.price * newCartItem.amount;
 
     // 변경된 상태를 객체 형태로 리턴 -> cartState로 전달
     return {
