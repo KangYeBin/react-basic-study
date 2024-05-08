@@ -1,18 +1,28 @@
 import './App.css';
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './components/Food/Layout/Header';
 import Meals from './components/Food/Meals/Meals';
+import CartProvider from './components/Store/CartProvider';
 import Cart from './components/Food/Cart/Cart';
 
 const App = () => {
+  // 장바구니 모달 공개 여부 상태 변수
+  const [cartIsShown, setCartIsShown] = useState(false);
+
+  // 모달을 열어주는 핸들러
+  const showCartHandler = () => setCartIsShown(true);
+
+  // 모달을 닫아주는 핸들러
+  const hideCartHandler = () => setCartIsShown(false);
+
   return (
-    <>
-      <Cart />
-      <Header />
+    <CartProvider>
+      {cartIsShown && <Cart onHideCart={hideCartHandler} />}
+      <Header onShowCart={showCartHandler} />
       <div id="main">
         <Meals />
       </div>
-    </>
+    </CartProvider>
   );
 };
 
