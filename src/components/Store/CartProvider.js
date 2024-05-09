@@ -47,14 +47,47 @@ const cartReducer = (state, action) => {
       totalPrice: updatedPrice,
     };
   } else if (action.type === 'REMOVE') {
-    // 지우려는 항목의 id와 일치하지 않는 항목만 따로 배열로 받아서 리턴 (filter)
-    const removedItem = state.items.filter(
-      (item) => item.id !== action.id,
+    // // 지우려는 항목의 id와 일치하지 않는 항목만 따로 배열로 받아서 리턴 (filter)
+    // const removedItem = state.items.filter(
+    //   (item) => item.id !== action.id,
+    // );
+    // return {
+    //   items: removedItem, // 최신 상태로 상태를 업데이트 -> cartState로 전달됨
+    // };
+
+    // 최신 상태의 배열을 복사
+    const existingItem = [...state.items];
+
+    // 수량을 감소시킬 대상의 인덱스 찾기
+    const index = existingItem.findIndex(
+      (item) => item.id === action.id,
     );
+
+    // 제거 대상 아이템을 가져온다
+    const delTargetItem = existingItem[index];
+
+    // 총액 계산
+    const updatePrice = state.totalPrice - delTargetItem.price;
+
+    // 업데이트 전의 수량이 1이라면 - 버튼을 눌렀을 때 장바구니에서 제외
+    // 1보다 크다면 제거하지 않고 기존 배열에서 수량만 -1해서 업데이트
+    let removedItems;
+    if (delTargetItem.amount === 1) {
+      removedItems = state.items.filter(
+        (item) => item.id !== action.id,
+      );
+    } else {
+      delTargetItem.amount--;
+      removedItems = [...existingItem];
+    }
+
     return {
-      items: removedItem, // 최신 상태로 상태를 업데이트 -> cartState로 전달됨
+      items: removedItems,
+      totalPrice: updatePrice,
     };
   }
+
+  return defaultState;
 };
 
 const CartProvider = ({ children }) => {
